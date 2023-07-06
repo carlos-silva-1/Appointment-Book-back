@@ -1,6 +1,6 @@
 const path = require('path');
 const express = require('express');
-const colors = require('colors');
+const cors = require('cors');
 const dotenv = require('dotenv').config({path: "./.env"});
 const { errorHandler } = require('./middleware/errorMiddleware');
 const connectDB = require('./config/db');
@@ -12,6 +12,8 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+app.use(cors({ origin: true, credentials: true }));
 
 app.use('/api/appointments', require('./routes/appointmentRoutes'));
 app.use('/api/users', require('./routes/userRoutes'));
